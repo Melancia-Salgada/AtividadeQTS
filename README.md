@@ -18,6 +18,8 @@ INFO: ------------------------------------------------------------------------
        Display Name: CT01.1 - Fluxo Principal: Pesagem dentro da tolerância de 3% (RN03)
        Time: 0.002s
 
+
+
 [ OK ] testPesagemFaltante()
        Display Name: CT02 - Fluxo Alternativo: Peso Insuficiente (Abaixo de 3%)
        Time: 0.004s
