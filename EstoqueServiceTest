@@ -1,0 +1,60 @@
+package com.projeto.estoque.tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import com.projeto.estoque.model.Produto;
+import com.projeto.estoque.service.EstoqueService;
+
+class EstoqueServiceTest {
+
+    private EstoqueService estoqueService;
+    private Produto produtoTeste;
+
+    @BeforeEach
+    void setUp() {
+        estoqueService = new EstoqueService();
+        produtoTeste = new Produto();
+        produtoTeste.setNome("Parafuso Aço");
+        produtoTeste.setPesoUnitarioGramas(100.0);
+    }
+
+    @Test
+    @DisplayName("CT01 - Fluxo Principal: Pesagem dentro do ideal (RN02)")
+    void testPesagemSucesso() {
+        String resultado = estoqueService.realizarPesagem(produtoTeste, "Prateleira A", 10, 1000.0);
+        assertEquals("Pesagem concluída", resultado);
+    }
+
+    @Test
+    @DisplayName("CT01.1 - Fluxo Principal: Pesagem dentro da tolerância de 3% (RN03)")
+    void testPesagemComTolerancia() {
+        String resultado = estoqueService.realizarPesagem(produtoTeste, "Prateleira A", 10, 1020.0);
+        assertEquals("Pesagem concluída", resultado);
+    }
+
+    @Test
+    @DisplayName("CT02 - Fluxo Alternativo: Peso Insuficiente (Abaixo de 3%)")
+    void testPesagemFaltante() {
+        String resultado = estoqueService.realizarPesagem(produtoTeste, "Prateleira A", 10, 900.0);
+        assertTrue(resultado.contains("Faltam unidades"));
+    }
+
+    @Test
+    @DisplayName("CT03 - Fluxo de Exceção: Peso Excedido (Acima de 3%)")
+    void testPesagemExcedida() {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            estoqueService.realizarPesagem(produtoTeste, "Prateleira A", 10, 1100.0);
+        });
+        assertEquals("Alerta! Peso excedido para o produto selecionado!", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("CT04 - Validação RN01: Local de Armazenagem Inválido")
+    void testLocalInvalido() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            estoqueService.realizarPesagem(produtoTeste, null, 10, 1000.0);
+        });
+    }
+}
