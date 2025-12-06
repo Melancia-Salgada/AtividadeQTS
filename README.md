@@ -18,8 +18,6 @@ INFO: ------------------------------------------------------------------------
        Display Name: CT01.1 - Fluxo Principal: Pesagem dentro da tolerância de 3% (RN03)
        Time: 0.002s
 
-
-
 [ OK ] testPesagemFaltante()
        Display Name: CT02 - Fluxo Alternativo: Peso Insuficiente (Abaixo de 3%)
        Time: 0.004s
@@ -52,7 +50,7 @@ Pacote: com.projeto.estoque.service
 Este pacote contém a lógica de controle e as regras de negócio.
 
 Classe	      Instruções (Cov.)	  Branches (Cov.)	      Métodos (Cov.)	       Status
-EstoqueService	100% (28/28)	        100% (6/6)  	      100% (1/1)	      ✅ Aprovado
+EstoqueService	100% (28/28)	        100% (6/6)  	      100% (1/1)	       Aprovado
 
 Análise: O método realizarPesagem foi totalmente coberto.
 
@@ -69,6 +67,6 @@ Pacote: com.projeto.estoque.model
 Este pacote contém as entidades de domínio.
 
 Classe	Instruções (Cov.)	    Branches (Cov.)	    Métodos (Cov.)	     Status
-Produto	    100% (10/10)	          N/A	           100% (4/4)	       ✅ Aprovado
+Produto	    100% (10/10)	          N/A	           100% (4/4)	        Aprovado
 
 Análise: Getters e Setters foram exercitados durante a configuração (setUp) dos testes.
